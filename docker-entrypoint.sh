@@ -32,3 +32,15 @@ if [ ! -z "$PGSQL_USERNAME" ] && [ ! -z "$PGSQL_HOST" ]; then
     -U "$PGSQL_USERNAME" \
     > /dump/pgsql-$TIMESTAMP.sql
 fi
+
+##########
+# Elastic
+##########
+
+if [ ! -z "$ELASTIC_HOST" ]; then
+  echo "Dumping Elastic @ $ELASTIC_HOST"
+  elasticdump \
+    --input=$ELASTIC_HOST \
+    --output=/dump/elastic-$TIMESTAMP.json \
+    --type=data
+fi
